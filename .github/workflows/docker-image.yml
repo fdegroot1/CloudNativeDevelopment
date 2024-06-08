@@ -28,7 +28,7 @@ jobs:
       run: dotnet build CloudNativeDevelopment.sln --configuration Release
 
     - name: Build and run unit tests
-      run: dotnet test  CloudNativeDevelopment/PokemonWebApi.Unit.Tests/PokemonWebApi.Unit.Tests.csproj --no-build --verbosity normal
+      run: dotnet test  PokemonWebApi.Unit.Tests/PokemonWebApi.Unit.Tests.csproj --no-restore --verbosity normal
 
     - name: Build and run integration tests
-      run: dotnet test  CloudNativeDevelopment/PokemonWebApi.Integration.Tests/PokemonWebApi.Integration.Tests.csproj --no-build --verbosity normal
+      run: dotnet test  PokemonWebApi.Integration.Tests/PokemonWebApi.Integration.Tests.csproj --no-restore --verbosity normal
