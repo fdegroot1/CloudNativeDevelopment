@@ -9,7 +9,6 @@ namespace PokemonWebApi.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("pokemon_id")]
-
         public int PokemonId { get; set; }
         [Column("pokemon_name")]
         public string PokemonName { get; set; }
