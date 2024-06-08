@@ -23,6 +23,7 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: .
 
     - name: Build and run unit tests
       run: dotnet test PokemonWebApi.Unit.Tests/PokemonWebApi.Unit.Tests.csproj --no-build --verbosity normal
