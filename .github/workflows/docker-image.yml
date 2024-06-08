@@ -27,6 +27,13 @@ jobs:
     - name: Build solution
       run: dotnet build CloudNativeDevelopment.sln --configuration Release
 
+    - name: Debug Integration Test Project Path
+      run: echo /PokemonWebApi.Integration.Tests/PokemonWebApi.Integration.Tests.csproj
+
+    - name: Debug Integration Test Project Path
+      run: echo CloudNativeDevelopment/CloudNativeDevelopment/PokemonWebApi.Integration.Tests/PokemonWebApi.Integration.Tests.csproj
+
+
     - name: Build and run unit tests
       run: dotnet test  CloudNativeDevelopment/CloudNativeDevelopment/PokemonWebApi.Integration.Tests/PokemonWebApi.Integration.Tests.csproj --no-build --verbosity normal
 
