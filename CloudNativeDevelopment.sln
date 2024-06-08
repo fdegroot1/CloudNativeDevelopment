@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{C50741CA-C79E-4605-9573-51BA0B16603D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonWebApi", "PokemonWebApi\PokemonWebApi.csproj", "{6C3333E3-D73A-4254-9917-23D515ABB312}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2948FD0C-3529-4868-A628-0B013BB343CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonWebApi.Unit.Tests", "PokemonWebApi.Unit.Tests\PokemonWebApi.Unit.Tests.csproj", "{378A2AE6-BB20-43E0-8810-FE3F8E2AA920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonWebApi.Integration.Tests", "PokemonWebApi.Integration.Tests\PokemonWebApi.Integration.Tests.csproj", "{B2BDEBB6-1DE7-42BB-962E-51A7A8416D37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C3333E3-D73A-4254-9917-23D515ABB312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3333E3-D73A-4254-9917-23D515ABB312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3333E3-D73A-4254-9917-23D515ABB312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3333E3-D73A-4254-9917-23D515ABB312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2948FD0C-3529-4868-A628-0B013BB343CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2948FD0C-3529-4868-A628-0B013BB343CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2948FD0C-3529-4868-A628-0B013BB343CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2948FD0C-3529-4868-A628-0B013BB343CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{378A2AE6-BB20-43E0-8810-FE3F8E2AA920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{378A2AE6-BB20-43E0-8810-FE3F8E2AA920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{378A2AE6-BB20-43E0-8810-FE3F8E2AA920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{378A2AE6-BB20-43E0-8810-FE3F8E2AA920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2BDEBB6-1DE7-42BB-962E-51A7A8416D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2BDEBB6-1DE7-42BB-962E-51A7A8416D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2BDEBB6-1DE7-42BB-962E-51A7A8416D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2BDEBB6-1DE7-42BB-962E-51A7A8416D37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C3333E3-D73A-4254-9917-23D515ABB312} = {C50741CA-C79E-4605-9573-51BA0B16603D}
+		{378A2AE6-BB20-43E0-8810-FE3F8E2AA920} = {C50741CA-C79E-4605-9573-51BA0B16603D}
+		{B2BDEBB6-1DE7-42BB-962E-51A7A8416D37} = {C50741CA-C79E-4605-9573-51BA0B16603D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0989038-A835-4C6E-A143-D679BB68E6F9}
+	EndGlobalSection
+EndGlobal
