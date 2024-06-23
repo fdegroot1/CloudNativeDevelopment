@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using PokemonWebApi.Models;
 
-namespace PokemonWebApi
+namespace PokemonWebApi.Data
 {
-    public class PokemonDbContext : DbContext
+    public class PokemonDbContext : DbContext, IPokemonDbContext
     {
-        public PokemonDbContext(DbContextOptions<PokemonDbContext> options) : base(options) 
+        public PokemonDbContext(DbContextOptions<PokemonDbContext> options) : base(options)
         {
             try
             {
@@ -24,6 +24,13 @@ namespace PokemonWebApi
             }
         }
 
+        public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public DbSet<Team> Teams { get; set; }
         public DbSet<Pokemon> Pokemons { get; set; }
+        public DbSet<Move> Moves { get; set; }
     }
 }

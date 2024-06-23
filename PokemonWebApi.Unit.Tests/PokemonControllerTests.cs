@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using PokemonWebApi.Controllers;
+using PokemonWebApi.Data;
 using PokemonWebApi.Models;
 
 namespace PokemonWebApi.Unit.Tests

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PokemonWebApi.Data;
 using PokemonWebApi.Models;
 
 namespace PokemonWebApi.Controllers

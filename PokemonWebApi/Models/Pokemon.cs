@@ -13,6 +13,11 @@ namespace PokemonWebApi.Models
         [Column("pokemon_name")]
         public string PokemonName { get; set; }
 
+        [Column("pokemon_type")]
+        public string PokemonType { get; set; }
+
+        public List<Move> Moves { get; set; }
+
 
     }
 }

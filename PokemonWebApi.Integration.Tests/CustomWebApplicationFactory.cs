@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PokemonWebApi;
+using PokemonWebApi.Data;
 using PokemonWebApi.Models;
 using System;
 using System.Linq;
