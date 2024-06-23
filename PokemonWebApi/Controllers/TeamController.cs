@@ -27,27 +27,27 @@ namespace PokemonWebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<TeamDto>> CreateTeam(TeamDto teamDto)
         {
-            /*if (teamDto.Pokemons.Count <= 6)
+            if (teamDto.Pokemons.Count != 6)
             {
                 return BadRequest("A team must have exactly 6 Pokémon.");
-            }*/
+            }
 
             var team = _mapper.Map<Team>(teamDto);
 
             foreach (var pokemon in team.Pokemons)
             {
-                /*if (pokemon.Moves.Count <= 4)
+                if (pokemon.Moves.Count != 4)
                 {
                     return BadRequest($"Pokémon {pokemon.PokemonName} must have exactly 4 moves.");
-                }*/
+                }
 
                 foreach (var move in pokemon.Moves)
                 {
-                   /* var canLearn = await _pokemonRepository.CanLearnMoveAsync(pokemon.PokemonName.ToLower(), move.MoveName.ToLower());
+                    var canLearn = await _pokemonRepository.CanLearnMoveAsync(pokemon.PokemonName.ToLower(), move.MoveName.ToLower());
                     if (!canLearn)
                     {
                         return BadRequest($"Pokémon {pokemon.PokemonName} cannot learn the move {move.MoveName}.");
-                    }*/
+                    }
                 }
             }
 
