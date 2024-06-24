@@ -21,7 +21,7 @@ namespace PokemonWebApi.Controllers
         {
             var success = await _moveService.AddMoveToPokemonAsync(teamId, pokemonId, moveDto);
             if (!success)
-                return NotFound(); // or BadRequest, depending on your application logic
+                return NotFound();
 
             return Ok();
         }
@@ -31,7 +31,7 @@ namespace PokemonWebApi.Controllers
         {
             var success = await _moveService.DeletePokemonMoveAsync(teamId, pokemonId, moveName);
             if (!success)
-                return NotFound(); // or BadRequest, depending on your application logic
+                return NotFound();
 
             return NoContent(); // 204 No Content response
         }

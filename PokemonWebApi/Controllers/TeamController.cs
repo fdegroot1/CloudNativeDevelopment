@@ -41,7 +41,7 @@ namespace PokemonWebApi.Controllers
             if (teamDto == null)
                 return NotFound();
 
-            return teamDto;
+            return Ok(teamDto);
         }
 
         [HttpGet]
