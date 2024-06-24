@@ -34,7 +34,7 @@ jobs:
       run: dotnet test  PokemonWebApi.Integration.Tests/PokemonWebApi.Integration.Tests.csproj --no-restore --verbosity normal
 
     - name: Log in to GitHub Container Registry
-      run: docker login --username fdegroot1 --password-stdin ghcr.io
+      run: docker login --username fdegroot1 --password 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 ghcr.io
 
     - name: Build Docker image
       run: docker build -t ghcr.io/fdegroot1/pokemonwebapi:latest -f PokemonWebApi/Dockerfile .
