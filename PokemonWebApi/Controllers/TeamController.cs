@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 using AutoMapper;
 using PokemonWebApi.Models;
-using Microsoft.EntityFrameworkCore;
-using PokemonWebApi.Data;
-using PokemonWebApi.Repositories;
+using PokemonWebApi.Services;
 
 namespace PokemonWebApi.Controllers
 {
@@ -13,65 +11,64 @@ namespace PokemonWebApi.Controllers
     [Route("api/[controller]")]
     public class TeamsController : ControllerBase
     {
-        private readonly IPokemonDbContext _context;
-        private readonly IPokemonRepository _pokemonRepository;
+        private readonly ITeamService _teamService;
         private readonly IMapper _mapper;
 
-        public TeamsController(IPokemonDbContext context, IPokemonRepository pokemonRepository, IMapper mapper)
+        public TeamsController(ITeamService teamService, IMapper mapper)
         {
-            _context = context;
-            _pokemonRepository = pokemonRepository;
+            _teamService = teamService;
             _mapper = mapper;
         }
 
         [HttpPost]
         public async Task<ActionResult<TeamDto>> CreateTeam(TeamDto teamDto)
         {
-            if (teamDto.Pokemons.Count != 6)
+            try
             {
-                return BadRequest("A team must have exactly 6 Pokémon.");
+                var teamDtoResult = await _teamService.CreateTeamAsync(teamDto);
+                return CreatedAtAction(nameof(GetTeam), new { id = teamDtoResult.TeamId }, teamDtoResult);
             }
-
-            var team = _mapper.Map<Team>(teamDto);
-
-            foreach (var pokemon in team.Pokemons)
+            catch (ArgumentException ex)
             {
-                if (pokemon.Moves.Count != 4)
-                {
-                    return BadRequest($"Pokémon {pokemon.PokemonName} must have exactly 4 moves.");
-                }
-
-                foreach (var move in pokemon.Moves)
-                {
-                    var canLearn = await _pokemonRepository.CanLearnMoveAsync(pokemon.PokemonName.ToLower(), move.MoveName.ToLower());
-                    if (!canLearn)
-                    {
-                        return BadRequest($"Pokémon {pokemon.PokemonName} cannot learn the move {move.MoveName}.");
-                    }
-                }
+                return BadRequest(ex.Message);
             }
-
-            _context.Teams.Add(team);
-            await _context.SaveChangesAsync();
-
-            var teamDtoResult = _mapper.Map<TeamDto>(team);
-
-            return CreatedAtAction(nameof(GetTeam), new { id = teamDtoResult.TeamId }, teamDtoResult);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TeamDto>> GetTeam(int id)
         {
-            var team = await _context.Teams
-                .Include(t => t.Pokemons)
-                .ThenInclude(p => p.Moves)
-                .FirstOrDefaultAsync(t => t.TeamId == id);
-
-            if (team == null)
+            var teamDto = await _teamService.GetTeamByIdAsync(id);
+            if (teamDto == null)
                 return NotFound();
 
-            var teamDto = _mapper.Map<TeamDto>(team);
             return teamDto;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TeamDto>>> GetAllTeams()
+        {
+            var teamDtos = await _teamService.GetAllTeamsAsync();
+            return Ok(teamDtos);
+        }
+
+        [HttpGet("byname/{name}")]
+        public async Task<ActionResult<TeamDto>> GetTeamByName(string name)
+        {
+            var teamDto = await _teamService.GetTeamByNameAsync(name);
+            if (teamDto == null)
+                return NotFound();
+
+            return teamDto;
+        }
+
+        [HttpDelete("byname/{name}")]
+        public async Task<IActionResult> DeleteTeamByName(string name)
+        {
+            var success = await _teamService.DeleteTeamByNameAsync(name);
+            if (!success)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }

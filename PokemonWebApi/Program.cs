@@ -1,16 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using PokemonWebApi.Data;
 using PokemonWebApi.Repositories;
+using PokemonWebApi.Services;
 using AutoMapper;
 using PokemonWebApi.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<HttpClient>();
-
-
 // Add services to the container.
+//builder.Services.AddSingleton<HttpClient>();
 
+// Add controllers
 builder.Services.AddControllers();
 
 // Database Context Dependency Injection
@@ -23,6 +23,13 @@ builder.Services.AddDbContext<PokemonDbContext>(opt => opt.UseSqlServer(connecti
 // Registering repositories and context
 builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
 builder.Services.AddScoped<IPokemonDbContext, PokemonDbContext>();
+
+// Registering services
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IPokemonService, PokemonService>();
+builder.Services.AddScoped<IMoveService, MoveService>();
+
+builder.Services.AddHttpClient<IPokeApiService, PokeApiService>();
 
 // Registering AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));

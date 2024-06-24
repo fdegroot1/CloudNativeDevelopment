@@ -1,58 +1,39 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PokemonWebApi.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using PokemonWebApi.Models;
+using PokemonWebApi.Services;
+using System.Threading.Tasks;
 
 namespace PokemonWebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class PokemonController : ControllerBase
     {
-        private readonly PokemonDbContext _pokemonDbContext;
-        public PokemonController(PokemonDbContext pokemonDbContext)
+        private readonly IPokemonService _pokemonService;
+
+        public PokemonController(IPokemonService pokemonService)
         {
-            _pokemonDbContext = pokemonDbContext;
+            _pokemonService = pokemonService;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Pokemon>> GetPokemons()
+        [HttpPost("{teamId}")]
+        public async Task<ActionResult> AddPokemonToTeam(int teamId, PokemonDto pokemonDto)
         {
-            return _pokemonDbContext.Pokemons;
+            var success = await _pokemonService.AddPokemonToTeamAsync(teamId, pokemonDto);
+            if (!success)
+                return BadRequest("Failed to add Pokémon to team.");
+
+            return Ok();
         }
 
-        [HttpGet("{pokemonId:int}")]
-        public async Task<ActionResult<Pokemon>> GetById(int pokemonId)
+        [HttpDelete("{teamId}/{pokemonId}")]
+        public async Task<ActionResult> RemovePokemonFromTeam(int teamId, int pokemonId)
         {
-            var pokemon = await _pokemonDbContext.Pokemons.FindAsync(pokemonId);
-            return Ok(pokemon);
+            var success = await _pokemonService.RemovePokemonFromTeamAsync(teamId, pokemonId);
+            if (!success)
+                return NotFound("Pokemon or team not found.");
+
+            return Ok();
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(Pokemon pokemon)
-        {
-            await _pokemonDbContext.Pokemons.AddAsync(pokemon);
-            await _pokemonDbContext.SaveChangesAsync();
-            return Ok(pokemon);
-        }
-
-        [HttpPut("{pokemonId:int}")]
-        public async Task<IActionResult> Update(Pokemon pokemon)
-        {
-            _pokemonDbContext.Pokemons.Update(pokemon);
-            await _pokemonDbContext.SaveChangesAsync();
-            return Ok(pokemon);
-        }
-
-        [HttpDelete("{pokemonId:int}")]
-        public async Task<IActionResult> Delete(int pokemonId)
-        {
-            var pokemon = await _pokemonDbContext.Pokemons.FindAsync(pokemonId);
-            _pokemonDbContext.Pokemons.Remove(pokemon);
-            await _pokemonDbContext.SaveChangesAsync();
-            return Ok(pokemon);
-        }
-
-
     }
 }
