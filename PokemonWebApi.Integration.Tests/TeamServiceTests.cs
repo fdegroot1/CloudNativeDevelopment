@@ -6,7 +6,7 @@ using PokemonWebApi.Models;
 using PokemonWebApi.Repositories;
 using PokemonWebApi.Services;
 
-namespace PokemonWebApi.Unit.Tests.Services
+namespace PokemonWebApi.Integration.Tests.Services
 {
     public class TeamServiceTests
     {

@@ -20,6 +20,13 @@ namespace PokemonWebApi.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Creates a new team.
+        /// </summary>
+        /// <param name="teamDto">The team details.</param>
+        /// <returns>Returns the newly created team.</returns>
+        /// <response code="201">Returns the newly created team.</response>
+        /// <response code="400">If there is a validation error or the team cannot be created.</response>
         [HttpPost]
         public async Task<ActionResult<TeamDto>> CreateTeam(TeamDto teamDto)
         {
@@ -34,6 +41,13 @@ namespace PokemonWebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves a specific team by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the team to retrieve.</param>
+        /// <returns>Returns the requested team.</returns>
+        /// <response code="200">Returns the requested team.</response>
+        /// <response code="404">If the team with the specified ID is not found.</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<TeamDto>> GetTeam(int id)
         {
@@ -44,6 +58,11 @@ namespace PokemonWebApi.Controllers
             return Ok(teamDto);
         }
 
+        /// <summary>
+        /// Retrieves all teams.
+        /// </summary>
+        /// <returns>Returns a list of all teams.</returns>
+        /// <response code="200">Returns a list of all teams.</response>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TeamDto>>> GetAllTeams()
         {
@@ -51,6 +70,13 @@ namespace PokemonWebApi.Controllers
             return Ok(teamDtos);
         }
 
+        /// <summary>
+        /// Retrieves a specific team by its name.
+        /// </summary>
+        /// <param name="name">The name of the team to retrieve.</param>
+        /// <returns>Returns the requested team.</returns>
+        /// <response code="200">Returns the requested team.</response>
+        /// <response code="404">If the team with the specified name is not found.</response>
         [HttpGet("byname/{name}")]
         public async Task<ActionResult<TeamDto>> GetTeamByName(string name)
         {
@@ -61,6 +87,13 @@ namespace PokemonWebApi.Controllers
             return teamDto;
         }
 
+        /// <summary>
+        /// Deletes a team by its name.
+        /// </summary>
+        /// <param name="name">The name of the team to delete.</param>
+        /// <returns>Returns No Content if the team was successfully deleted.</returns>
+        /// <response code="204">If the team was successfully deleted.</response>
+        /// <response code="404">If the team with the specified name is not found.</response>
         [HttpDelete("byname/{name}")]
         public async Task<IActionResult> DeleteTeamByName(string name)
         {
